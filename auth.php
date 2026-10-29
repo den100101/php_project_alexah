@@ -1,13 +1,18 @@
 <?php
-/*
- * auth.php - session + role based access control
- * Include this at the top of every protected page.
- */
 
 if (session_status() === PHP_SESSION_NONE) {
+    $isHttps = (
+        (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off")
+        || (($_SERVER["HTTP_X_FORWARDED_PROTO"] ?? "") === "https")
+    );
+
+    ini_set("session.use_strict_mode", "1");
+    ini_set("session.cookie_httponly", "1");
+    ini_set("session.cookie_secure", $isHttps ? "1" : "0");
+    ini_set("session.cookie_samesite", "Lax");
+
     session_start();
 }
-
 // Page key => [label, file]
 const PAGES = [
     'subjects'    => ['Subjects',    'subjects.php'],
