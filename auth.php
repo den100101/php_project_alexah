@@ -59,10 +59,10 @@ function require_access($pageKey)
     if (!can_access($pageKey)) {
         http_response_code(403);
         echo '<!DOCTYPE html><html><head><title>Access Denied</title></head>'
-           . '<body style="font-family:Arial;text-align:center;margin-top:100px">'
-           . '<h1>403 - Access Denied</h1>'
-           . '<p>Your usertype (' . h(current_usertype()) . ') is not allowed to open this page.</p>'
-           . '<a href="dashboard.php">Back to Dashboard</a></body></html>';
+            . '<body style="font-family:Arial;text-align:center;margin-top:100px">'
+            . '<h1>403 - Access Denied</h1>'
+            . '<p>Your usertype (' . h(current_usertype()) . ') is not allowed to open this page.</p>'
+            . '<a href="dashboard.php">Back to Dashboard</a></body></html>';
         exit();
     }
 }
@@ -101,5 +101,3 @@ function csrf_check()
         exit('Invalid request token.');
     }
 }
-
-?>
